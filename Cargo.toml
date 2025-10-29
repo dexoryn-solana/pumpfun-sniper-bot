@@ -1,0 +1,76 @@
+[package]
+name = "shred_pool_cache"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+# thin has minimal overhead vs none (default): https://blog.llvm.org/2016/06/thinlto-scalable-and-incremental-lto.html
+lto = "thin"
+
+[dependencies]
+moka = { version = "0.12.10", features = ["sync"] }
+
+tokio = { version = "1.0", features = ["full"] }
+anyhow = "1.0"
+futures = "0.3"
+tonic = "0.12.3"
+tonic-health = "0.12.3"
+hex = "0.4"
+
+thiserror = "1.0.38"
+
+# Solana ecosystem - all pinned to 2.2.1
+solana-sdk = "=2.2.1"
+solana-client = "=2.2.1"
+solana-program = "=2.2.1"
+solana-account-decoder = "=2.2.1"
+solana-transaction-status = "=2.2.1"
+solana-rpc-client = "=2.2.1"
+solana-rpc-client-api = "=2.2.1"
+solana-hash = "=2.2.1"
+solana-connection-cache = "=2.2.1"
+solana-quic-client = "=2.2.1"
+solana-udp-client = "=2.2.1"
+spl-associated-token-account = "=6.0.0"
+spl-token-2022 = "8.0.1"
+solana-entry = "=2.2.1"
+
+
+# TLS and security
+rustls = { version = "0.23.23", features = ["ring"] }
+rustls-native-certs = "0.8.1"
+tokio-rustls = "0.26.1"
+
+# Other dependencies
+log = "0.4"
+env_logger = "0.10.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bs58 = "0.5.1"
+ahash = "0.8.5"
+chrono = "0.4"
+dotenv = "0.15"
+tokio-tungstenite = { version = "0.20", features = ["native-tls"] }
+futures-util = "0.3"
+
+# Balance Monitor dependencies
+url = "2.5.0"
+reqwest = { version = "0.11", features = ["json"] }
+
+base64 = "0.21.0"
+
+lazy_static = "1.4"
+
+jito-protos = { path = "./jito_protos" }
+jito-searcher-client = { path = "./jito_sc" }
+
+bincode = "1.3.3"
+spl-token = "8.0.0"
+tracing = "0.1.41"
+toml = "0.8.22"
+rand = "0.9.1"
+
+# openssl-sys 0.9.107 rejects OpenSSL 4.x; openssl 0.10.72 does not
+# compile against OpenSSL 4. Pin versions that support 4.0.2.
+openssl-sys = "0.9.114"
+openssl = "0.10.78"
